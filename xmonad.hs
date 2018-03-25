@@ -7,6 +7,7 @@ import XMonad.Wallpaper
 import XMonad.Actions.Volume
 import XMonad.Util.Dzen
 import XMonad.Layout.Tabbed
+import XMonad.Layout.PerWorkspace
     
 -- The main function.
 main = xmonad . ewmh =<< statusBar myBar myPP toggleStrutsKey
@@ -52,10 +53,30 @@ myConfig = defaultConfig
     , terminal = "mlterm"
     , handleEventHook = fullscreenEventHook
 --    , layoutHook = avoidStruts  $  layoutHook defaultConfig
-    , layoutHook = simpleTabbed
+    , layoutHook = myLayout
+    , workspaces = myWorkspaces
     , borderWidth = 0
     , startupHook = spawn "~/.xmonad/autostart"
     }
 
 
---myWorkspaces = ["1:irc", "2:www", "3:music", "4:misc", "5:xbmc", "6:GIMP", "7:slideshow!", "8:foo()", "9:vbox"]
+-- The available layouts.  Note that each layout is separated by |||,
+-- which denotes layout choice.
+--
+myMainLayout = tiled ||| Mirror tiled ||| Full
+  where
+     -- default tiling algorithm partitions the screen into two panes
+     tiled   = Tall nmaster delta ratio
+     -- The default number of windows in the master pane
+     nmaster = 1
+     -- Default proportion of screen occupied by master pane
+     ratio   = 1/2
+     -- Percent of screen to increment by when resizing panes
+     delta   = 3/100
+
+-- chain onWorkspace to specify layout per workspace,
+-- the last element of the chain is the default layout
+-- for all not specified workspaces
+myLayout = onWorkspace "1:term" simpleTabbed $ myMainLayout
+     
+myWorkspaces = ["1:term", "2:emacs", "3:browser", "4:chat", "5:misc1", "6:misc2", "7:misc3", "8:misc4", "9:misc5"]
