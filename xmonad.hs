@@ -25,6 +25,7 @@ main = xmonad . ewmh =<< statusBar myBar myPP toggleStrutsKey
                      , ("<XF86AudioMute>", (fmap (\m -> if m then "On" else "Off") toggleMute) >>= alertString)
                      , ("<XF86Launch1>", (return "1") >>= alertString)
                      , ("M-e", spawn "$HOME/Sources/emacs/emacs/src/emacs")
+                     , ("M-l", spawn "i3lock -f -i $HOME/Pictures/Backgrounds/Godafoss_Iceland.png")
                      ])
 
 
