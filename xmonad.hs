@@ -25,7 +25,7 @@ main = xmonad . ewmh =<< statusBar myBar myPP toggleStrutsKey
                      , ("<XF86AudioMute>", (fmap (\m -> if m then "On" else "Off") toggleMute) >>= alertString)
                      , ("<XF86Launch1>", (return "1") >>= alertString)
                      , ("M-e", spawn "$HOME/Sources/emacs/emacs/src/emacs")
-                     , ("M-l", spawn "i3lock -f -i $HOME/Pictures/Backgrounds/Godafoss_Iceland.png")
+                     , ("<XF86ScreenSaver>", spawn "i3lock -f -i $HOME/Pictures/Backgrounds/Godafoss_Iceland.png")
                      ])
 
 
@@ -51,7 +51,8 @@ centered =
 myConfig = defaultConfig
     { modMask = mod4Mask -- Use Super instead of Alt
 --    , terminal = "gnome-terminal"
-    , terminal = "mlterm"
+--    , terminal = "mlterm"
+    , terminal = "urxvt"
     , handleEventHook = fullscreenEventHook
 --    , layoutHook = avoidStruts  $  layoutHook defaultConfig
     , layoutHook = myLayout
@@ -78,6 +79,8 @@ myMainLayout = tiled ||| Mirror tiled ||| Full
 -- chain onWorkspace to specify layout per workspace,
 -- the last element of the chain is the default layout
 -- for all not specified workspaces
-myLayout = onWorkspace "1:term" simpleTabbed $ myMainLayout
+myLayout = onWorkspace "1:term" simpleTabbed
+           $ onWorkspace "4:chat" simpleTabbed
+           $ myMainLayout
      
 myWorkspaces = ["1:term", "2:emacs", "3:browser", "4:chat", "5:misc1", "6:misc2", "7:misc3", "8:misc4", "9:misc5"]
