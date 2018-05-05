@@ -8,6 +8,7 @@ import XMonad.Actions.Volume
 import XMonad.Util.Dzen
 import XMonad.Layout.Tabbed
 import XMonad.Layout.PerWorkspace
+import qualified XMonad.StackSet as StackSet
     
 -- The main function.
 main = xmonad . ewmh =<< statusBar myBar myPP toggleStrutsKey
@@ -26,6 +27,10 @@ main = xmonad . ewmh =<< statusBar myBar myPP toggleStrutsKey
                      , ("<XF86Launch1>", (return "1") >>= alertString)
                      , ("M-e", spawn "$HOME/Sources/emacs/emacs/src/emacs")
                      , ("<XF86ScreenSaver>", spawn "i3lock -f -i $HOME/Pictures/Backgrounds/Godafoss_Iceland.png")
+                     , ("M-<Right>", XMonad.windows StackSet.focusDown)
+                     , ("M-<Left>", XMonad.windows StackSet.focusUp)
+                     , ("M-S-<Right>", XMonad.windows StackSet.swapDown)
+                     , ("M-S-<Left>", XMonad.windows StackSet.swapUp)
                      ])
 
 
