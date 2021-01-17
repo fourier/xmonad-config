@@ -33,6 +33,8 @@ main = xmonad . ewmh =<< statusBar myBar myPP toggleStrutsKey
         -- swap tabs
         , ("M-S-<Right>", XMonad.windows StackSet.swapDown)
         , ("M-S-<Left>", XMonad.windows StackSet.swapUp)
+        , ("M-<F1>", spawn "xrandr --output DP-0 --off")
+        , ("M-<F2>", spawn "xrandr --output LVDS-1-1 --left-of DP-0 --output DP-0 --auto")
         ])
 
 

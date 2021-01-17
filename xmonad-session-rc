@@ -1,4 +1,4 @@
 source $HOME/.fehbg
 udiskie &
 dunst &
-#xss-lock -- i3lock -n -f -i /home/fourier/Pictures/Backgrounds/Godafoss_Iceland.png &
+#xss-lock -- i3lock -n -f -i /usr/share/backgrounds/cosmos/comet.jpg &
